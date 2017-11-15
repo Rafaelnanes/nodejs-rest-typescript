@@ -1,6 +1,5 @@
 import * as express from 'express';
 import { Application } from 'express';
-import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
 
 class Api {
@@ -9,7 +8,6 @@ class Api {
 
     constructor() {
         this.express = express();
-        this.express.use(morgan('dev'));
         this.express.use(bodyParser.urlencoded({ extended: true }));
         this.express.use(bodyParser.json());
 
@@ -17,7 +15,6 @@ class Api {
             res.send('ok');
         });
     }
-
     
 }
 
