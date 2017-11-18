@@ -15,3 +15,4 @@ models.sequelize.sync().then(() => {
     server.on('error', (error: NodeJS.ErrnoException) => console.log(`Error on server, ${error}`));
 });
 
+

@@ -1,4 +1,8 @@
-## [1.3.0] - 2017-11-15
+## [1.4.0] - 2017-11-18
+### Added
+- Controller, Service and DAO layers
+
+## [1.3.0] - 2017-11-18
 ### Added
 - Environment control
 

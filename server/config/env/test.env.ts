@@ -1,6 +1,6 @@
 module.exports = {
     env: 'test',
-    db: 'node_test',
+    db: 'node_dev',
     dialect: 'mysql',
     username: 'root',
     password: '1234',

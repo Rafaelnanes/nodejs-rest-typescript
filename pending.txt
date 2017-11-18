@@ -2,3 +2,6 @@
 2 - format log output
 3 - search for debug
 4 - transactions
+5 - sequelize version_schema
+6 - try to export the models instead of using require
+7 - initialize sequelize in test context

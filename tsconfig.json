@@ -9,7 +9,11 @@
         ],
         "types": [
             "node"
-        ]
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "api-route-interface" : ["./server/api/controllers/app-controller"]
+        }
     },
     "files": [
         ".server/*.ts"

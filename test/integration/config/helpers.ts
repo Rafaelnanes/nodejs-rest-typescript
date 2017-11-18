@@ -6,7 +6,7 @@ import App from '../../../server/api/api';
 
 const app = App;
 const request = supertest;
-const expect = Chai.expect;
+const assert = Chai.assert;
 const testDouble = td;
 
-export { app, expect, request, testDouble };
+export { app, assert, request, testDouble };
