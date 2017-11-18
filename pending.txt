@@ -7,3 +7,4 @@
 7 - initialize sequelize in test context
 8 - test concurrency
 9 - see await ex: user = await User.findOne()
+10 - Constants
