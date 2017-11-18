@@ -5,3 +5,5 @@
 5 - sequelize version_schema
 6 - try to export the models instead of using require
 7 - initialize sequelize in test context
+8 - test concurrency
+9 - see await ex: user = await User.findOne()

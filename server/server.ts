@@ -1,13 +1,13 @@
 import * as http from 'http';
 import Api from './api/api';
-import Logger from './config/logger';
+import { Logger } from './config/logger';
 import appConfig from './config/app-config';
 const models = require('./models');
 
+Logger.get();
+
 const server = http.createServer(Api);
 let port = appConfig().serverPort;
-
-new Logger();
 
 models.sequelize.sync().then(() => {
     server.listen(port);

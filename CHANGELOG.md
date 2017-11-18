@@ -1,3 +1,7 @@
+## [2.0.0] - 2017-11-18
+### Added
+- Jwt Authorization strategy
+
 ## [1.4.0] - 2017-11-18
 ### Added
 - Controller, Service and DAO layers

@@ -3,14 +3,22 @@ import * as wiston from 'winston';
 let fs = require('fs');
 let logDir = 'log';
 
-class Logger {
+export class Logger {
 
-    public wiston: Winston;
-    public logger: Logger;
+    private static instance: Logger;
+    private wiston: Winston;
+    private logger: any;
 
     constructor() {
         this.wiston = wiston;
         this.registerLog();
+    }
+
+    public static get(): Logger {
+        if (this.instance == null) {
+            this.instance = new Logger();
+        }
+        return this.instance;
     }
 
     public registerLog() {
@@ -19,7 +27,7 @@ class Logger {
         }
 
         let tsFormat = () => (new Date()).toLocaleTimeString();
-        let logger = new (this.wiston.Logger)({
+        this.logger = new (this.wiston.Logger)({
             transports: [
                 // colorize the output to the console
                 new (wiston.transports.Console)({
@@ -37,13 +45,12 @@ class Logger {
             ]
         });
 
-        logger.info('Test info log');
-        logger.debug('Test debug log');
+        this.logger.info('Test info log');
+        this.logger.debug('Test debug log');
     }
 
-    public getLogger(): Logger {
-        return this.logger;
+    public info(str: string): void {
+        this.logger.info(str);
     }
+
 }
-
-export default Logger;
