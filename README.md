@@ -1,0 +1,2 @@
+1 - In VS Code, press control + shift + B, then click in watch task, to watch file changes and publish in build folder.
+2 - Type in console: nodemon ./build/server/server to start the server in compiled mode.

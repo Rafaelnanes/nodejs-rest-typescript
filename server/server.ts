@@ -1,9 +1,10 @@
 import * as http from 'http';
 import Api from './api/api';
 import Logger from './config/logger';
+import appConfig from './config/app-config';
 
 const server = http.createServer(Api);
-let port = 8080;
+let port = appConfig().serverPort;
 
 new Logger();
 

@@ -1,3 +1,7 @@
+## [1.3.0] - 2017-11-15
+### Added
+- Environment control
+
 ## [1.2.0] - 2017-11-15
 ### Added
 - Integration tests 
