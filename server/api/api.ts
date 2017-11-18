@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { Application } from 'express';
 import * as bodyParser from 'body-parser';
-import { UserController } from './controllers';
+import UserController from './controllers/user-controller';
 import Auth from './security/auth';
 import { AuthorizationMiddleware } from './security/authorization-middleware';
 
@@ -14,12 +14,13 @@ class Api {
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(bodyParser.json());
         this.app.use(Auth.initialize());
+        
         new AuthorizationMiddleware(this.app);
         this.registerControllers();
     }
 
     public registerControllers(): void {
-        new UserController(this.app).registerRoutes();
+        UserController.registerRoutes(this.app);
     }
 
 }

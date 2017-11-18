@@ -1,24 +1,22 @@
 import { Application } from 'express';
 import UserService from '../services/user-service';
-import { AbstractController } from './abstract-controller';
 import Auth from '../security/auth';
 import * as passport from 'passport';
 const model = require('../../models');
 
-export class UserController extends AbstractController {
+class UserController  {
 
     private moduleName: string = "/user";
 
-    constructor(app: Application) {
-        super(app);
+    constructor() {
     }
 
-    public registerRoutes(): void {
-        this.findAll();
+    public registerRoutes(app: Application): void {
+        this.findAll(app);
     }
 
-    public findAll(): void {
-        this.app.get(
+    public findAll(app: Application): void {
+        app.get(
             this.moduleName,
             Auth.authenticate(),
             (req, res) => {
@@ -30,3 +28,5 @@ export class UserController extends AbstractController {
     }
 
 }
+
+export default new UserController();

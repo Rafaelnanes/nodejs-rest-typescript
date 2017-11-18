@@ -27,7 +27,7 @@ describe('Integration Tests', () => {
                 .end((error, res) => {
                     assert.isNotNull(res);
                     assert.equal(HTTPStatus.OK, res.status);
-                    assert.equal(res.body.length, 2);
+                    assert.equal(res.body.length, 1);
                     done(error);
                 })
         })

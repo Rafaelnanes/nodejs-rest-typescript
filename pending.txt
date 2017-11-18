@@ -8,3 +8,4 @@
 8 - test concurrency
 9 - see await ex: user = await User.findOne()
 10 - Constants
+11 - run tests with sequelize db:drop, db:create, db:migration, db:seed:all
