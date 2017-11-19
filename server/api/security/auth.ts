@@ -1,7 +1,5 @@
 import { Application } from 'express';
 import UserService from '../services/user-service';
-import { AuthorizationMiddleware } from './authorization-middleware';
-import { Logger } from '../../config/logger';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { Request } from 'express';
 import * as passport from 'passport';

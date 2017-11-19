@@ -3,7 +3,7 @@ import * as wiston from 'winston';
 let fs = require('fs');
 let logDir = 'log';
 
-export class Logger {
+class Logger {
 
     private static instance: Logger;
     private wiston: Winston;
@@ -49,8 +49,10 @@ export class Logger {
         this.logger.debug('Test debug log');
     }
 
-    public info(str: string): void {
-        this.logger.info(str);
+    public get() {
+        return this.logger;
     }
 
 }
+
+export default new Logger();

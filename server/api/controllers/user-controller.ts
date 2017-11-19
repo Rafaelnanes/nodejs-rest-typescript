@@ -1,10 +1,9 @@
 import { Application } from 'express';
 import UserService from '../services/user-service';
 import Auth from '../security/auth';
-import * as passport from 'passport';
-const model = require('../../models');
+import Handler from '../handlers/handler';
 
-class UserController  {
+class UserController {
 
     private moduleName: string = "/user";
 
@@ -13,6 +12,7 @@ class UserController  {
 
     public registerRoutes(app: Application): void {
         this.findAll(app);
+        this.save(app);
     }
 
     public findAll(app: Application): void {
@@ -20,9 +20,19 @@ class UserController  {
             this.moduleName,
             Auth.authenticate(),
             (req, res) => {
-                UserService.findAll().then(users => {
-                    res.send(users);
-                });
+                let exec = UserService.findAll();
+                Handler.sendResponse(req, res, exec);
+            });
+
+    }
+
+    public save(app: Application): void {
+        app.post(
+            this.moduleName,
+            Auth.authenticate(),
+            (req, res) => {
+                let exec = UserService.save(req.body);
+                Handler.sendResponse(req, res, exec);
             });
 
     }

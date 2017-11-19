@@ -1,22 +1,30 @@
 import UserDAO from '../dao/userDAO';
 import { User } from '../models/user';
-import * as Bluebird from 'bluebird';
-import { Logger } from '../../config/logger';
+import * as Promisse from 'bluebird';
+import { ApiException } from '../exceptions';
 
 class UserService {
 
-    constructor() {
+    public save(user: User): Promisse<any> {
+        let query = JSON.parse(`{ "login": "${user.login}" }`);
+        return UserDAO.findOneByQuery(query).then(userDB => {
+            if (userDB == null) {
+                return UserDAO.save(user);
+            } else {
+                throw new ApiException('User already exists');
+            }
+        });
     }
 
-    public findAll(): Bluebird<User[]> {
+    public findAll(): Promisse<User[]> {
         return UserDAO.findAll();
     }
 
-    public findById(id: number): Bluebird<User> {
+    public findById(id: number): Promisse<User> {
         return UserDAO.findById(id);
     }
 
-    public findOneByQuery(json: JSON): Bluebird<User> {
+    public findOneByQuery(json: JSON): Promisse<User> {
         return UserDAO.findOneByQuery(json);
     }
 

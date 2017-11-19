@@ -3,7 +3,8 @@ import { Application } from 'express';
 import * as bodyParser from 'body-parser';
 import UserController from './controllers/user-controller';
 import Auth from './security/auth';
-import { AuthorizationMiddleware } from './security/authorization-middleware';
+import AuthorizationMiddleware  from './security/authorization-middleware';
+import Handler from './handlers/handler';
 
 class Api {
 
@@ -14,8 +15,8 @@ class Api {
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(bodyParser.json());
         this.app.use(Auth.initialize());
-        
-        new AuthorizationMiddleware(this.app);
+        this.app.use(Handler.errorHandlerApi);
+        AuthorizationMiddleware.register(this.app);
         this.registerControllers();
     }
 

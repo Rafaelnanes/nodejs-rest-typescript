@@ -19,7 +19,7 @@ describe('Integration Tests', () => {
         });
     });
 
-    describe('GET /', () => {
+    describe('GET /user', () => {
         it('Should return all users', done => {
             request(app)
                 .get('/user')
@@ -27,7 +27,41 @@ describe('Integration Tests', () => {
                 .end((error, res) => {
                     assert.isNotNull(res);
                     assert.equal(HTTPStatus.OK, res.status);
-                    assert.equal(res.body.length, 1);
+                    assert.equal(res.body.status, 1);
+                    assert.equal(res.body.data.length, 1);
+                    done(error);
+                })
+        })
+    })
+
+    describe('POST /user', () => {
+        it('Should add an user', done => {
+            var user = { "login": "admin23", "password": "admin" };
+            request(app)
+                .post('/user')
+                .send(user)
+                .set('authorization', token)
+                .end((error, res) => {
+                    assert.isNotNull(res);
+                    assert.equal(HTTPStatus.OK, res.status);
+                    assert.equal(res.body.status, 1);
+                    assert.isNotNull(res.body.data);
+                    done(error);
+                })
+        })
+    })
+
+    describe('POST /user', () => {
+        it('Should return error message because user already exists', done => {
+            var user = { "login": "admin", "password": "admin" };
+            request(app)
+                .post('/user')
+                .send(user)
+                .set('authorization', token)
+                .end((error, res) => {
+                    assert.isNotNull(res);
+                    assert.equal(HTTPStatus.OK, res.status);
+                    assert.equal(res.body.status, 0);
                     done(error);
                 })
         })

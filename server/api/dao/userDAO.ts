@@ -1,16 +1,20 @@
 const model = require('../../models');
-import * as Bluebird from 'bluebird';
+import * as Promise from 'bluebird';
 import { User } from '../models/user';
 
 class UserDAO {
 
-    public findAll(): Bluebird<User[]> {
+    public save(user:User):Promise<User>{
+        return model.user.build(user).save();
+    }
+
+    public findAll(): Promise<User[]> {
         return model.user.findAll({
             order: ['login']
         });
     }
 
-    public findById(id: number): Bluebird<User> {
+    public findById(id: number): Promise<User> {
         return model.user.findAll({
             where: {
                 id: id
@@ -20,7 +24,7 @@ class UserDAO {
         });
     }
 
-    public findOneByQuery(json: JSON): Bluebird<User> {
+    public findOneByQuery(json: JSON): Promise<any> {
         return model.user.findOne({
             where: json,
             attributes: ['id', 'login'],
