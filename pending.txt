@@ -2,10 +2,8 @@
 2 - format log output
 3 - search for debug
 4 - transactions
-5 - sequelize version_schema
+5 - sequelize version_schema for seeds
 6 - try to export the models instead of using require
-7 - initialize sequelize in test context
-8 - test concurrency
-9 - see await ex: user = await User.findOne()
-10 - Constants
-11 - run tests with sequelize db:drop, db:create, db:migration, db:seed:all
+7 - test concurrency
+8 - see await ex: user = await User.findOne()
+9 - Constants
