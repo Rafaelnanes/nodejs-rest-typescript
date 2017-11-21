@@ -1,18 +1,18 @@
 import * as HTTPStatus from 'http-status';
 import { app, request, assert } from './config/helpers';
-var token;
+import Consts from '../../server/api/config/consts';
+let token;
 
 describe('Integration Tests', () => {
-
+    let user = { "login": "admin", "password": "admin" };
     describe('/POST login', function () {
-        var user = { "login": "admin", "password": "admin" };
         it('Should return token', (done) => {
             request(app)
                 .post('/login')
                 .send(user)
                 .end(function (error, res) {
-                    assert.equal(200, res.status);
-                    token = res.headers['authorization'];
+                    assert.equal(res.status, HTTPStatus.OK);
+                    token = res.headers[Consts.TOKEN_HEADER];
                     assert.isNotNull(token);
                     done();
                 });
@@ -23,28 +23,28 @@ describe('Integration Tests', () => {
         it('Should return all users', done => {
             request(app)
                 .get('/user')
-                .set('authorization', token)
+                .set(Consts.TOKEN_HEADER, token)
                 .end((error, res) => {
                     assert.isNotNull(res);
-                    assert.equal(HTTPStatus.OK, res.status);
-                    assert.equal(res.body.status, 1);
-                    assert.equal(res.body.data.length, 1);
+                    assert.equal(res.status, HTTPStatus.OK);
+                    assert.equal(Consts.STATUS_SUCCESS, res.body.status);
+                    assert.equal(1, res.body.data.length);
                     done(error);
                 })
         })
     })
-
+    
     describe('POST /user', () => {
         it('Should add an user', done => {
-            var user = { "login": "admin23", "password": "admin" };
+            let user = { "login": "admin23", "password": "admin" };
             request(app)
                 .post('/user')
                 .send(user)
-                .set('authorization', token)
+                .set(Consts.TOKEN_HEADER, token)
                 .end((error, res) => {
                     assert.isNotNull(res);
-                    assert.equal(HTTPStatus.OK, res.status);
-                    assert.equal(res.body.status, 1);
+                    assert.equal(res.status, HTTPStatus.OK);
+                    assert.equal(Consts.STATUS_SUCCESS, res.body.status);
                     assert.isNotNull(res.body.data);
                     done(error);
                 })
@@ -53,15 +53,14 @@ describe('Integration Tests', () => {
 
     describe('POST /user', () => {
         it('Should return error message because user already exists', done => {
-            var user = { "login": "admin", "password": "admin" };
             request(app)
                 .post('/user')
                 .send(user)
-                .set('authorization', token)
+                .set(Consts.TOKEN_HEADER, token)
                 .end((error, res) => {
                     assert.isNotNull(res);
-                    assert.equal(HTTPStatus.OK, res.status);
-                    assert.equal(res.body.status, 0);
+                    assert.equal(res.status, HTTPStatus.OK);
+                    assert.equal(Consts.STATUS_ERROR, res.body.status);
                     done(error);
                 })
         })

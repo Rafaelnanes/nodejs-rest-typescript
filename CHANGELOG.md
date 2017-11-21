@@ -1,3 +1,11 @@
+## [2.0.1] - 2017-11-21
+### Added
+- Constants
+- Bcrypt
+### Updated
+- Improved the code using, async and await
+
+
 ## [2.0.0] - 2017-11-18
 ### Added
 - Jwt Authorization strategy

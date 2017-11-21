@@ -1,14 +1,14 @@
 {
   "name": "nodejs-rest-typescript",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "rest application using typescript",
   "main": "server.js",
   "scripts": {
     "start": "npm run sequelize-dev && cross-env NODE_ENV=development ./node_modules/.bin/ts-node ./server/server.ts",
     "builded": "node ./build/server.js",
     "test": "npm run sequelize-test && cross-env NODE_ENV=test mocha --timeout 10000 ./build/test/integration/user-test.js",
-    "sequelize-test" : "cd ./server && sequelize --env=test db:migrate:undo:all && sequelize --env=test db:migrate",
-    "sequelize-dev" : "cd ./server && sequelize --env=development db:migrate"
+    "sequelize-test": "cd ./server && sequelize --env=test db:migrate:undo:all && sequelize --env=test db:migrate",
+    "sequelize-dev": "cd ./server && sequelize --env=development db:migrate"
   },
   "repository": {
     "type": "git",
@@ -37,7 +37,8 @@
     "sequelize": "^3.30.4",
     "sequelize-cli": "^3.0.0",
     "winston": "^2.4.0",
-    "winston-daily-rotate-file": "^1.7.2"
+    "winston-daily-rotate-file": "^1.7.2",
+    "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
     "@types/body-parser": "^1.16.8",

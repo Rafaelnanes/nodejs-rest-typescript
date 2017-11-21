@@ -1,10 +1,5 @@
-1 - Dependency Injection
-2 - format log output
-3 - search for debug
-4 - transactions
-5 - sequelize version_schema for seeds
-6 - try to export the models instead of using require
-7 - test concurrency
-8 - see await ex: user = await User.findOne()
-9 - Constants
-10 - bcrypt
+1 - format log output
+2 - search for debug
+3 - transactions
+4 - test concurrency
+5 - asserts

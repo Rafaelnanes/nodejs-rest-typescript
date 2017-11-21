@@ -3,10 +3,11 @@ import UserService from '../services/user-service';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { Request } from 'express';
 import * as passport from 'passport';
+import Consts from '../config/consts';
 
 var opts = {
-    secretOrKey: "mySecret",
-    jwtFromRequest: ExtractJwt.fromHeader("authorization")
+    secretOrKey: Consts.TOKEN_SECRET,
+    jwtFromRequest: ExtractJwt.fromHeader(Consts.TOKEN_HEADER)
 };
 
 class Auth {
@@ -17,10 +18,10 @@ class Auth {
         this.passportInstance = new passport.Passport();
         this.passportInstance.use(this.getStrategy());
     }
-    
-    private getStrategy(){
+
+    private getStrategy() {
         return new Strategy(opts, function (payload, done) {
-            UserService.findById(payload.id).then(user => {
+            let user = UserService.findById(payload.id).then(user => {
                 if (user) {
                     return done(null, { id: user.id });
                 } else {
@@ -30,7 +31,7 @@ class Auth {
         });
     }
 
-    public initialize(){
+    public initialize() {
         return this.passportInstance.initialize();
     }
     public authenticate() {
