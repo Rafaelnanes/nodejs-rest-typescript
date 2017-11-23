@@ -31,5 +31,8 @@ export default function (sequelize, DataTypes) {
         }
     )
 
+    User.belongsToMany(sequelize.models.permission, { as: 'usr_id', through: 'USP_USER_PERMISSION', foreignKey: 'usr_id', timestamps: false });
+    sequelize.models.permission.belongsToMany(User, { as: 'per_id', through: 'USP_USER_PERMISSION', foreignKey: 'per_id', timestamps: false });
+
     return User;
 }

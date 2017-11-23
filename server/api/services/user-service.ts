@@ -28,9 +28,5 @@ class UserService {
         return UserDAO.findOneByQuery(json);
     }
 
-    public hasUserPermission(id: number, permissionName: string): boolean {
-        return permissionName == 'user.list' ? true : false;
-    }
-
 }
 export default new UserService();

@@ -13,7 +13,7 @@
         ],
         "baseUrl": ".",
         "paths": {
-            // "api-consts" : ["./server/api/config/consts.ts"]
+            "api-consts" : ["./server/api/config/consts.ts"]
         }
     },
     "files": [

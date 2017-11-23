@@ -1,5 +1,6 @@
 import { Application } from 'express';
 import UserService from '../services/user-service';
+import PermissionService from '../services/permission-service';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { Request } from 'express';
 import * as passport from 'passport';
@@ -36,6 +37,18 @@ class Auth {
     }
     public authenticate() {
         return this.passportInstance.authenticate("jwt", { session: false });
+    }
+
+    public authorize(permissionName) {
+        return async (req, res, next) => {
+            let isPermissionFound = await PermissionService.hasUserPermission(req.user.id, permissionName);
+
+            if (isPermissionFound) {
+                next();
+            } else {
+                res.sendStatus(401);
+            };
+        }
     }
 
 }

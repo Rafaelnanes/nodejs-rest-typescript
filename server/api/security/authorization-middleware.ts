@@ -2,6 +2,7 @@ import { Application } from 'express';
 import UserService from '../services/user-service';
 import * as HTTPStatus from 'http-status';
 import Consts from '../config/consts';
+import Utils from '../config/utils';
 var jwt = require('jsonwebtoken');
 
 class AuthorizationMiddleware {
@@ -11,7 +12,7 @@ class AuthorizationMiddleware {
             let status = HTTPStatus.UNAUTHORIZED;
             //TODO put de assert
             if (req.body.login && req.body.password) {
-                let password = req.body.password;
+                let password = Utils.generatePassword(req.body.password);
                 let query: any = {
                     login: req.body.login,
                     password: password

@@ -2,6 +2,7 @@ import * as http from 'http';
 import Api from './api/api';
 import Logger from './config/logger';
 import appConfig from './config/app-config';
+
 const models = require('./models');
 
 Logger.get(); //initialize logger
@@ -16,4 +17,5 @@ models.sequelize.sync().then(() => {
    
 });
 
+export default server;
 
