@@ -1,6 +1,6 @@
 export default function (sequelize, DataTypes) {
 
-    const Permission = sequelize.define('permission', {
+    const Permission = sequelize.define('Permission', {
         id: {
             field: 'per_id',
             type: DataTypes.INTEGER,

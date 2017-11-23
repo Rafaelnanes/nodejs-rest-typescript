@@ -1,11 +1,11 @@
-import PermissionDAO from '../dao/permissionDAO';
+import UserPermissionDAO from '../dao/userPermissionDAO';
 import { ApiException } from '../exceptions';
 
-class PermissionService {
+class UserPermissionService {
 
     public async hasUserPermission(id: number, permissionName: string): Promise<boolean> {
-        return PermissionDAO.hasPermission(id, permissionName);
+        return UserPermissionDAO.hasPermission(id, permissionName);
     }
 
 }
-export default new PermissionService();
+export default new UserPermissionService();

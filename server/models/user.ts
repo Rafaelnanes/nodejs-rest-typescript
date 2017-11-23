@@ -1,6 +1,6 @@
 export default function (sequelize, DataTypes) {
 
-    const User = sequelize.define('user', {
+    const User = sequelize.define('User', {
         id: {
             field: 'usr_id',
             type: DataTypes.INTEGER,
@@ -30,9 +30,6 @@ export default function (sequelize, DataTypes) {
             tableName: 'USR_USER'
         }
     )
-
-    User.belongsToMany(sequelize.models.permission, { as: 'usr_id', through: 'USP_USER_PERMISSION', foreignKey: 'usr_id', timestamps: false });
-    sequelize.models.permission.belongsToMany(User, { as: 'per_id', through: 'USP_USER_PERMISSION', foreignKey: 'per_id', timestamps: false });
 
     return User;
 }

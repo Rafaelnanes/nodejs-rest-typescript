@@ -1,3 +1,7 @@
+## [2.1.0] - 2017-11-23
+### Added
+- Many to Many relation about user and permission
+
 ## [2.0.1] - 2017-11-21
 ### Added
 - Constants

@@ -4,17 +4,17 @@ import { User } from '../models/user';
 class UserDAO {
 
     public async save(user: User): Promise<User> {
-        return model.user.build(user).save();
+        return model.User.build(user).save();
     }
 
     public async findAll(): Promise<User[]> {
-        return model.user.findAll({
+        return model.User.findAll({
             order: ['login']
         });
     }
 
     public async findById(id: number): Promise<User> {
-        return model.user.findAll({
+        return model.User.findOne({
             where: {
                 id: id
             }
@@ -24,7 +24,7 @@ class UserDAO {
     }
 
     public async findOneByQuery(json: JSON): Promise<any> {
-        return model.user.findOne({
+        return model.User.findOne({
             where: json,
             attributes: ['id', 'login'],
             model: User,

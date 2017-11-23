@@ -2,25 +2,23 @@ const model = require('../../models');
 import { Permission } from '../models/permission';
 import { User } from '../models/user';
 
-class PermissionDAO {
+class UserPermissionDAO {
 
     public async hasPermission(userId: number, permissionName: string): Promise<boolean> {
-        return model.permission.findAll({
+        return model.UserPermission.findAll({
             where: {
-                name: permissionName
+                userId: userId
             },
             include: [{
-                model: model.user
+                model: model.Permission,
+                where: { name: permissionName }
             }]
         }).then(permission => {
-            console.log('chegou4');
-            return permission != null;
-        }).catch(res =>{
-            console.log('chegou5', res);
+            return permission != null && permission.length > 0;
         })
         
     }
 
 }
 
-export default new PermissionDAO();
+export default new UserPermissionDAO();

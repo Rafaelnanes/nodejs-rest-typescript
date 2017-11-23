@@ -1,6 +1,6 @@
 import { Application } from 'express';
 import UserService from '../services/user-service';
-import PermissionService from '../services/permission-service';
+import UserPermissionService from '../services/permission-service';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { Request } from 'express';
 import * as passport from 'passport';
@@ -22,8 +22,8 @@ class Auth {
 
     private getStrategy() {
         return new Strategy(opts, function (payload, done) {
-            let user = UserService.findById(payload.id).then(user => {
-                if (user) {
+            UserService.findById(payload.id).then(user => {
+                if (user != null && user.id != null) {
                     return done(null, { id: user.id });
                 } else {
                     return done(new Error("User not found"), null);
@@ -41,7 +41,7 @@ class Auth {
 
     public authorize(permissionName) {
         return async (req, res, next) => {
-            let isPermissionFound = await PermissionService.hasUserPermission(req.user.id, permissionName);
+            let isPermissionFound = await UserPermissionService.hasUserPermission(req.user.id, permissionName);
 
             if (isPermissionFound) {
                 next();
