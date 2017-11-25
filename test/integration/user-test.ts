@@ -1,14 +1,25 @@
 import * as HTTPStatus from 'http-status';
 import { app, request, assert } from './config/helpers';
 import Consts from '../../server/api/config/consts';
-import server from '../../server/server';
-let token;
+import SequelizeMigration from '../../server/config/sequelize-migration';
+const models = require('../../server/models');
+
+let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTExNjA4NTY3LCJleHAiOjE1MTE2MDg1Njd9.HO2fGlTNMyTGcw98cW--a922FNI3_YZd80ij76f14bU';
+
+before((done) => {
+    models.sequelize.sync().then(() => {
+        SequelizeMigration.migrateOnTest().then(() => {
+            done();
+        });
+    })
+});
 
 describe('Integration Tests', () => {
     let user = { "login": "admin", "password": "admin" };
+
     describe('/POST login', function () {
         it('Should return token', (done) => {
-            request(server)
+            request(app)
                 .post('/login')
                 .send(user)
                 .end(function (error, res) {
@@ -22,23 +33,23 @@ describe('Integration Tests', () => {
 
     describe('GET /user', () => {
         it('Should return all users', done => {
-            request(server)
+            request(app)
                 .get('/user')
                 .set(Consts.TOKEN_HEADER, token)
                 .end((error, res) => {
                     assert.isNotNull(res);
                     assert.equal(res.status, HTTPStatus.OK);
                     assert.equal(Consts.STATUS_SUCCESS, res.body.status);
-                    assert.equal(1, res.body.data.length);
+                    assert.equal(2, res.body.data.length);
                     done(error);
                 })
         })
     })
-    
+
     describe('POST /user', () => {
         it('Should add an user', done => {
             let user = { "login": "admin23", "password": "admin" };
-            request(server)
+            request(app)
                 .post('/user')
                 .send(user)
                 .set(Consts.TOKEN_HEADER, token)
@@ -54,7 +65,7 @@ describe('Integration Tests', () => {
 
     describe('POST /user', () => {
         it('Should return error message because user already exists', done => {
-            request(server)
+            request(app)
                 .post('/user')
                 .send(user)
                 .set(Consts.TOKEN_HEADER, token)

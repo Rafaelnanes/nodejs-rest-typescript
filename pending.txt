@@ -1,5 +1,3 @@
 1 - format log output
 2 - search for debug
-3 - transactions
-4 - test concurrency
-5 - asserts
+3 - see alias to import
