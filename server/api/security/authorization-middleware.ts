@@ -33,7 +33,7 @@ class AuthorizationMiddleware {
                     user.permissions = permissions;
 
                     let encodedUser = new Buffer(JSON.stringify(user)).toString('base64');
-                    res.setHeader(Consts.TOKEN_HEADER, encodedUser + '.' + token);
+                    res.setHeader(Consts.TOKEN_HEADER, encodedUser + '||' + token);
                 }
                 res.sendStatus(status);
 

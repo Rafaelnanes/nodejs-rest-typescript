@@ -19,7 +19,7 @@ class UserController {
         app.get(
             this.moduleName,
             Auth.authenticate(),
-            Auth.authorize('user.list'),
+            Auth.authorize('user.info'),
             (req, res) => {
                 let exec = UserService.findAll();
                 Handler.sendResponse(req, res, exec);
@@ -31,7 +31,7 @@ class UserController {
         app.post(
             this.moduleName,
             Auth.authenticate(),
-            Auth.authorize('user.insert'),
+            Auth.authorize('user.operation'),
             (req, res) => {
                 let exec = UserService.save(req.body);
                 Handler.sendResponse(req, res, exec);

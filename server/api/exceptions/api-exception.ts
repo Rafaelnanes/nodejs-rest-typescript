@@ -1,7 +1,12 @@
 export class ApiException extends Error {
-    constructor(m: string) {
+
+    private status: number;
+
+    constructor(status: number, m: string) {
         super(m);
+        this.status = status;
     }
+
 
     public getMessage(): string {
         return this.message;

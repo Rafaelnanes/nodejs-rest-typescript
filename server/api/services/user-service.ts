@@ -12,7 +12,7 @@ class UserService {
             user.password = Utils.generatePassword(user.password);
             return UserDAO.save(user);
         } else {
-            throw new ApiException('User already exists');
+            throw new ApiException(409, 'User already exists');
         }
     }
 

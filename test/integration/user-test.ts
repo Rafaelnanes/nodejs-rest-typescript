@@ -24,7 +24,7 @@ describe('Integration Tests', () => {
                 .send(user)
                 .end(function (error, res) {
                     assert.equal(res.status, HTTPStatus.OK);
-                    token = res.headers[Consts.TOKEN_HEADER];
+                    token = res.headers[Consts.TOKEN_HEADER].split('||')[1];
                     assert.isNotNull(token);
                     done();
                 });
@@ -39,7 +39,6 @@ describe('Integration Tests', () => {
                 .end((error, res) => {
                     assert.isNotNull(res);
                     assert.equal(res.status, HTTPStatus.OK);
-                    assert.equal(Consts.STATUS_SUCCESS, res.body.status);
                     assert.equal(2, res.body.data.length);
                     done(error);
                 })
@@ -56,7 +55,6 @@ describe('Integration Tests', () => {
                 .end((error, res) => {
                     assert.isNotNull(res);
                     assert.equal(res.status, HTTPStatus.OK);
-                    assert.equal(Consts.STATUS_SUCCESS, res.body.status);
                     assert.isNotNull(res.body.data);
                     done(error);
                 })
@@ -71,8 +69,7 @@ describe('Integration Tests', () => {
                 .set(Consts.TOKEN_HEADER, token)
                 .end((error, res) => {
                     assert.isNotNull(res);
-                    assert.equal(res.status, HTTPStatus.OK);
-                    assert.equal(Consts.STATUS_ERROR, res.body.status);
+                    assert.equal(res.status, HTTPStatus.CONFLICT);
                     done(error);
                 })
         })
