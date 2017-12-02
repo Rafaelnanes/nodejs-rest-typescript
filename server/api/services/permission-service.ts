@@ -7,5 +7,16 @@ class UserPermissionService {
         return UserPermissionDAO.hasPermission(id, permissionName);
     }
 
+    public async findPermissionsByUser(userId: number): Promise<string[]> {
+        let userPermissions = await UserPermissionDAO.findPermissionsByUserId(userId);
+
+        let permissions: string[] = [];
+        userPermissions.forEach(element => {
+            permissions.push(element.Permission.name);
+        });
+
+        return permissions;
+    }
+
 }
 export default new UserPermissionService();

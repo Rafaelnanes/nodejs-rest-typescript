@@ -6,7 +6,7 @@ import Logger from '../../config/logger';
 class Handler {
 
     public errorHandlerApi(error: ErrorRequestHandler, req: Request, res: Response, next: NextFunction) {
-        Logger.get().info(`Internal error caused by: ${error}`);
+        Logger.info(`Internal error caused by: ${error}`);
         res.status(HTTPStatus.INTERNAL_SERVER_ERROR).json({
             status: Consts.STATUS_INTERNAL_ERROR,
             message: 'Internal Error'

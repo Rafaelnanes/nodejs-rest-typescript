@@ -16,7 +16,23 @@ class UserPermissionDAO {
         }).then(permission => {
             return permission != null && permission.length > 0;
         })
-        
+
+    }
+
+    public async findPermissionsByUserId(userId: number): Promise<any> {
+        return model.UserPermission.findAll({
+            where: {
+                userId: userId
+            },
+            include: [{
+                model: model.User,
+                where: { id: userId }
+            },
+            {
+                model: model.Permission
+            }]
+        });
+
     }
 
 }

@@ -47,10 +47,10 @@ class SequelizeMigration {
                     migrations: SCRIPTS,
                     method: 'up'
                 }).then(function (executed) {
-                    Logger.get().info("Migrations executed successfully");
+                    Logger.info("Migrations executed successfully");
                 });
             } else {
-                Logger.get().info("Database is updated");
+                Logger.info("Database is updated");
             }
         });
 

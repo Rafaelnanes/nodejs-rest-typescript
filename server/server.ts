@@ -6,16 +6,13 @@ import SequelizeMigration from './config/sequelize-migration';
 
 const models = require('./models');
 
-
-Logger.get(); //initialize logger
-
 const server = http.createServer(Api);
 let port = appConfig().serverPort;
 
 models.sequelize.sync().then(() => {
     server.listen(port);
     server.on('listening', () => {
-        console.log(`Server is up in port ${port}`);
+        Logger.info(`Server is up in port ${port}`);
         SequelizeMigration.migrateOnDev();
     });
     server.on('error', (error: NodeJS.ErrnoException) => console.log(`Error on server, ${error}`));
