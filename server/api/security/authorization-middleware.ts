@@ -29,7 +29,8 @@ class AuthorizationMiddleware {
                         Consts.TOKEN_SECRET,
                         { expiresIn: Consts.TOKEN_EXPIRATION }
                     );
-                    let permissions = await PermissionService.findPermissionsByUser(user.id);
+
+                    let permissions = await PermissionService.findPermissionsByUser(user);
                     user.permissions = permissions;
 
                     let encodedUser = new Buffer(JSON.stringify(user)).toString('base64');

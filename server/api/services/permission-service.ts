@@ -1,5 +1,6 @@
-import UserPermissionDAO from '../dao/userPermissionDAO';
+import UserPermissionDAO from '../dao/profile-permission-DAO';
 import { ApiException } from '../exceptions';
+import { User } from '../dto/user';
 
 class UserPermissionService {
 
@@ -7,8 +8,8 @@ class UserPermissionService {
         return UserPermissionDAO.hasPermission(id, permissionName);
     }
 
-    public async findPermissionsByUser(userId: number): Promise<string[]> {
-        let userPermissions = await UserPermissionDAO.findPermissionsByUserId(userId);
+    public async findPermissionsByUser(user: User): Promise<string[]> {
+        let userPermissions = await UserPermissionDAO.findPermissionsByUser(user);
 
         let permissions: string[] = [];
         userPermissions.forEach(element => {

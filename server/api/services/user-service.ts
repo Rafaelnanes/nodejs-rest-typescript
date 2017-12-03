@@ -1,5 +1,5 @@
-import UserDAO from '../dao/userDAO';
-import { User } from '../models/user';
+import UserDAO from '../dao/user-DAO';
+import { User } from '../dto/user';
 import { ApiException } from '../exceptions';
 import Utils from '../config/utils';
 
@@ -7,6 +7,7 @@ class UserService {
 
     public async save(user: User): Promise<any> {
         let query = JSON.parse(`{ "login": "${user.login}" }`);
+
         let userDb: User = await UserDAO.findOneByQuery(query);
         if (userDb == null) {
             user.password = Utils.generatePassword(user.password);

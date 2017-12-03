@@ -24,7 +24,8 @@ class Auth {
         return new Strategy(opts, function (payload, done) {
             UserService.findById(payload.id).then(user => {
                 if (user != null && user.id != null) {
-                    return done(null, { id: user.id });
+                    delete user.password;
+                    return done(null, user);
                 } else {
                     return done(new Error("User not found"), null);
                 }
@@ -41,7 +42,7 @@ class Auth {
 
     public authorize(permissionName) {
         return async (req, res, next) => {
-            let isPermissionFound = await UserPermissionService.hasUserPermission(req.user.id, permissionName);
+            let isPermissionFound = await UserPermissionService.hasUserPermission(req.user.profileId, permissionName);
 
             if (isPermissionFound) {
                 next();

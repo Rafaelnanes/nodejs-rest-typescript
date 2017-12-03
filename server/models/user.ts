@@ -22,12 +22,25 @@ export default function (sequelize, DataTypes) {
             validate: {
                 notEmpty: true
             }
+        },
+        profileId: {
+            field: 'prf_id',
+            type: DataTypes.UUID,
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
         }
     },
         {
             timestamps: false,
             freezeTableName: true,
-            tableName: 'USR_USER'
+            tableName: 'USR_USER',
+            classMethods: {
+                associate: function (models) {
+                    User.belongsTo(models.Profile, { foreignKey: 'prf_id' });
+                }
+            }
         }
     )
 

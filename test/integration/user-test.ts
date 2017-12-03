@@ -15,7 +15,7 @@ before((done) => {
 });
 
 describe('Integration Tests', () => {
-    let user = { "login": "admin", "password": "admin" };
+    let user = { login: "admin", password: "admin", profileId: 1 };
 
     describe('/POST login', function () {
         it('Should return token', (done) => {
@@ -47,7 +47,7 @@ describe('Integration Tests', () => {
 
     describe('POST /user', () => {
         it('Should add an user', done => {
-            let user = { "login": "admin23", "password": "admin" };
+            let user = { login: "admin23", password: "admin", profileId: 1 };
             request(app)
                 .post('/user')
                 .send(user)
